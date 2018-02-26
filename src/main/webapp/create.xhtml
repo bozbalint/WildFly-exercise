@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="template.xhtml">
+    <ui:define name="content">
+        <h:messages />
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputLabel for="flightId">Enter flight Id:</h:outputLabel>
+                <h:inputText id="flightId" value="#{newFlight.flightId}" />
+                <h:message for="flightId" />
+
+                <h:outputLabel for="carrierName">Enter carrier Name:</h:outputLabel>
+                <h:inputText id="carrierName" value="#{newFlight.carrierName}" />
+                <h:message for="carrierName" />
+
+                <h:outputLabel for="airportFrom">Enter Airport From:</h:outputLabel>
+                <h:inputText id="airportFrom" value="#{newFlight.airportFrom}" />
+                <h:message for="airportFrom" />
+
+                <h:outputLabel for="airportTo">Enter Airport To:</h:outputLabel>
+                <h:inputText id="airportTo" value="#{newFlight.airportTo}" />
+                <h:message for="airportTo" />
+				
+                <h:outputLabel for="departure">Enter Departure Time:</h:outputLabel>
+                <h:inputText id="departure" value="#{newFlight.departure}" >
+       	            <f:convertDateTime pattern = "HH:mm" />
+   	            </h:inputText>
+                <h:message for="departure" />
+
+                <h:outputLabel for="arrival">Enter Arrival Time:</h:outputLabel>
+                <h:inputText id="arrival" value="#{newFlight.arrival}" >
+       	            <f:convertDateTime pattern = "HH:mm" />
+   	            </h:inputText>
+                <h:message for="arrival" />
+
+            </h:panelGrid>
+            <h:commandButton action="#{createController.create}"
+                value="Add Flight" />
+        </h:form>
+		<br />
+        <h:link outcome="/search.xhtml">Search a flight!</h:link>
+    </ui:define>
+</ui:composition>
+</html>
