@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="content">
+		<h:messages />
+		<h:form id="searchForm">
+				Departure from (hh:mm): <h:inputText id="departureFrom"
+					value="#{searchController.departureFrom}">
+					<f:convertDateTime pattern="HH:mm" />
+				</h:inputText>
+				<h:message for="departureFrom" />
+				Arrival to (hh:mm): <h:inputText id="departureTo"
+					value="#{searchController.departureTo}">
+					<f:convertDateTime pattern="HH:mm" />
+				</h:inputText>
+				<h:message for="departureTo" />
+				<h:commandButton id="search" value="Search!"
+					action="#{searchController.search}" />
+		</h:form>
+		<br/>
+		<h:form>
+			<h:dataTable value="#{searchController.flights}" var="flight" rendered="#{searchController.flights.size() > 0}">
+				<h:column>
+					<f:facet name="header">ID</f:facet>#{flight.id}</h:column>
+				<h:column>
+					<f:facet name="header">Flight ID</f:facet>
+					<h:inputText value="#{flight.flightId}" size="10"
+						rendered="#{flight.editable}" />
+					<h:outputText value="#{flight.flightId}"
+						rendered="#{not flight.editable}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Carrier Name</f:facet>
+					<h:inputText value="#{flight.carrierName}" size="10"
+						rendered="#{flight.editable}" />
+					<h:outputText value="#{flight.carrierName}"
+						rendered="#{not flight.editable}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Airport From</f:facet>
+					<h:inputText value="#{flight.airportFrom}" size="10"
+						rendered="#{flight.editable}" />
+					<h:outputText value="#{flight.airportFrom}"
+						rendered="#{not flight.editable}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Airport To</f:facet>
+					<h:inputText value="#{flight.airportTo}" size="10"
+						rendered="#{flight.editable}" />
+					<h:outputText value="#{flight.airportTo}"
+						rendered="#{not flight.editable}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Departure</f:facet>
+					<h:inputText value="#{flight.departure}" size="10"
+						rendered="#{flight.editable}">
+						<f:convertDateTime pattern="HH:mm" />
+					</h:inputText>
+					<h:outputText value="#{flight.departure}"
+						rendered="#{not flight.editable}">
+						<f:convertDateTime pattern="HH:mm" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Arrival</f:facet>
+					<h:inputText value="#{flight.arrival}" size="10"
+						rendered="#{flight.editable}">
+						<f:convertDateTime pattern="HH:mm" />
+					</h:inputText>
+					<h:outputText value="#{flight.arrival}"
+						rendered="#{not flight.editable}">
+						<f:convertDateTime pattern="HH:mm" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Action</f:facet>
+
+					<h:commandLink value="Edit"
+						action="#{searchController.editAction(flight)}"
+						rendered="#{not flight.editable}" />
+
+				</h:column>
+			</h:dataTable>
+			<br />
+			<h:commandButton value="Save Changes"
+				action="#{searchController.saveAction}" rendered="#{searchController.flights.size() > 0}"/>
+		</h:form>
+		<br />
+		<h:link outcome="/create.xhtml" value="Add a new flight" />
+	</ui:define>
+</ui:composition>
+</html>
