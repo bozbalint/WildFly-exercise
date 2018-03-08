@@ -46,7 +46,6 @@ public class EJBFlightDao implements FlightDao {
         return entityManager.find(Flight.class, id);
     }
 
-    @Override
     public List<Flight> getAll() {
         return getByDeparture(null, null);
     }
