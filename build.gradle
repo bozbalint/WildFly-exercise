@@ -9,8 +9,8 @@ buildscript {
 }
 
 apply plugin:'java'
-apply plugin: 'ear'
 apply plugin: 'war'
+apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
